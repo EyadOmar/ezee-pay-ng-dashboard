@@ -12,12 +12,45 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture
 
+Admin dashboard SPA with two layout shells and lazy-loaded pages.
+
 - **Angular 21** standalone application (no NgModules) with signal-based reactivity
 - **UI framework:** PrimeNG 21 with a custom Aura-based theme (`src/app/myTheme.ts`)
-- **Styling:** Tailwind CSS 4 via PostCSS plugin (`@tailwindcss/postcss`), integrated with PrimeNG via `tailwindcss-primeui`
+- **Styling:** Tailwind CSS 4 via PostCSS plugin (`@tailwindcss/postcss`), integrated with PrimeNG via `tailwindcss-primeui`. **Always use Tailwind utility classes — do not create component CSS files.**
 - **Dark mode:** Uses CSS class selector `.my-app-dark` (configured in both `app.config.ts` and `src/styles.css`)
+- **HTTP:** `HttpClient` with functional interceptor (`core/interceptors/auth.interceptor.ts`) that attaches Bearer tokens. `ApiService` provides a base-URL-aware wrapper; feature services can use it or inject `HttpClient` directly.
+- **Auth:** Signal-based `AuthService` manages token/user state. Functional `authGuard` protects dashboard routes and redirects to `/login`.
 - **Testing:** Vitest (not Karma/Jasmine) with Angular TestBed; globals available via `vitest/globals` types
 - **Component selector prefix:** `app`
+
+## Project Structure
+
+```
+src/app/
+├── core/
+│   ├── guards/          # authGuard (functional CanActivateFn)
+│   ├── interceptors/    # authInterceptor (functional HttpInterceptorFn)
+│   ├── models/          # shared interfaces (ApiResponse, User)
+│   └── services/        # singleton services (ApiService, AuthService)
+├── shared/
+│   └── components/      # reusable components used across pages
+├── layouts/
+│   ├── auth-layout/     # centered shell for login/register/forgot-password
+│   └── dashboard-layout/# sidebar + topbar + content area shell
+├── pages/
+│   ├── auth/            # login, register, forgot-password
+│   └── dashboard/       # overview, products, orders, customers, inventory, reports, settings
+├── app.routes.ts        # two layout groups: auth (public) + dashboard (guarded)
+├── app.config.ts        # providers: router, HttpClient+interceptors, PrimeNG theme
+└── myTheme.ts           # custom PrimeNG preset (colors defined in Color Guidelines below)
+```
+
+## Routing
+
+- Auth pages (`/login`, `/register`, `/forgot-password`) render inside `AuthLayout` — no guard
+- Dashboard pages (`/dashboard`, `/products`, `/orders`, etc.) render inside `DashboardLayout` — protected by `authGuard`
+- All pages are lazy-loaded via `loadComponent` with default exports
+- Wildcard `**` redirects to `/dashboard`
 
 ## Key Configuration
 
@@ -28,9 +61,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Conventions
 
 - Components use standalone imports (no shared modules) — import PrimeNG modules directly in each component's `imports` array
+- Page components use **default exports** for clean lazy-load routing
+- Layout and shared components use **named exports**
 - App bootstraps via `bootstrapApplication()` with providers in `app.config.ts`
 - Routes defined in `app.routes.ts`
 - Static assets go in `public/`
+- File naming follows Angular short convention: `name.ts` / `name.html` (no `.component.` infix)
+- **No component CSS files** — all styling via Tailwind utility classes in templates
 
 ## Color Guidelines
 
