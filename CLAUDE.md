@@ -70,6 +70,17 @@ src/app/
 - **No component CSS files** — all styling via Tailwind utility classes in templates
 - **Always use Reactive Forms** (`FormGroup`, `FormControl`, `Validators` from `@angular/forms`) — never template-driven forms. Import `ReactiveFormsModule` in components that need forms.
 
+## i18n (Internationalization)
+
+- **Library:** `@jsverse/transloco` with runtime language switching (no separate builds)
+- **Supported languages:** English (`en`) and Arabic (`ar`) with full RTL support
+- **Translation files:** `public/assets/i18n/en.json` and `public/assets/i18n/ar.json` — flat keys with dot-notation grouping (e.g., `auth.errors.emailRequired`)
+- **Usage in templates:** Wrap the root element with `*transloco="let t"`, then use `{{ t('key') }}` for interpolation or `[label]="t('key')"` for property binding
+- **Usage in TypeScript:** Inject `TranslocoService` and call `this.transloco.translate('key')`
+- **Language service:** `LanguageService` manages language/direction/PrimeNG locale/localStorage persistence. Use `langService.setLanguage('ar')` to switch.
+- **RTL convention:** Always use logical CSS properties (`ps/pe/ms/me/start/end`) instead of physical (`pl/pr/ml/mr/left/right`)
+- **Adding new strings:** Add to both `en.json` and `ar.json` with matching keys
+
 ## Color Guidelines
 
 The custom theme is defined in `src/app/myTheme.ts` (extending Aura). Use these semantic colors — never hardcode hex values when a PrimeNG token or Tailwind utility exists.

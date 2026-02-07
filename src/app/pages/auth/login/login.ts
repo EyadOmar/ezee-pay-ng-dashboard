@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { Button } from 'primeng/button';
 import { FloatLabel } from 'primeng/floatlabel';
 import { InputText } from 'primeng/inputtext';
@@ -10,12 +11,22 @@ import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink, Button, FloatLabel, InputText, Message, Password],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    TranslocoDirective,
+    Button,
+    FloatLabel,
+    InputText,
+    Message,
+    Password,
+  ],
   templateUrl: './login.html',
 })
 export default class Login {
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly transloco = inject(TranslocoService);
 
   readonly isSubmitting = signal(false);
   readonly errorMessage = signal('');
@@ -45,7 +56,9 @@ export default class Login {
         this.router.navigate(['/dashboard']);
       },
       error: (err: Error) => {
-        this.errorMessage.set(err.message || 'Login failed. Please try again.');
+        this.errorMessage.set(
+          err.message || this.transloco.translate('auth.errors.loginFailed'),
+        );
         this.isSubmitting.set(false);
       },
     });

@@ -10,6 +10,13 @@
     if (document.cookie.split('; ').some(c => c === 'theme=dark')) {
       document.documentElement.classList.add('my-app-dark');
     }
+    (function() {
+      var lang = localStorage.getItem('app_lang');
+      if (lang === 'ar') {
+        document.documentElement.setAttribute('lang', 'ar');
+        document.documentElement.setAttribute('dir', 'rtl');
+      }
+    })();
   </script>
 </head>
 <body>

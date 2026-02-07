@@ -1,7 +1,7 @@
-<div>
+<div *transloco="let t">
   <div class="space-y-2 mb-8 text-center">
-    <h1 class="text-3xl font-bold text-surface-900">Welcome back</h1>
-    <p class="text-surface-500 dark:text-surface-400">Sign in to your account to continue</p>
+    <h1 class="text-3xl font-bold text-surface-900">{{ t('auth.welcomeBack') }}</h1>
+    <p class="text-surface-500 dark:text-surface-400">{{ t('auth.signInSubtitle') }}</p>
   </div>
 
   @if (errorMessage()) {
@@ -13,15 +13,15 @@
     <div class="flex flex-col gap-2">
       <p-floatlabel variant="on">
         <input fluid pInputText id="email" formControlName="email" autocomplete="email" />
-        <label for="email">Email</label>
+        <label for="email">{{ t('auth.email') }}</label>
       </p-floatlabel>
       @if (form.controls.email.invalid && (form.controls.email.touched || isSubmitting())) {
         <p-message severity="error" size="small" variant="simple">
           @if (form.controls.email.hasError('required')) {
-            Email is Required.
+            {{ t('auth.errors.emailRequired') }}
           }
           @if (form.controls.email.hasError('email')) {
-            Please enter a valid email.
+            {{ t('auth.errors.emailInvalid') }}
           }
         </p-message>
       }
@@ -38,26 +38,33 @@
           fluid
           inputStyleClass="w-full"
         />
-        <label for="password">Password</label>
+        <label for="password">{{ t('auth.password') }}</label>
       </p-floatlabel>
       @if (form.controls.password.invalid && (form.controls.password.touched || isSubmitting())) {
         <p-message severity="error" size="small" variant="simple">
           @if (form.controls.password.hasError('required')) {
-            Password is required.
+            {{ t('auth.errors.passwordRequired') }}
           }
           @if (form.controls.password.hasError('minlength')) {
-            Password must be at least 6 characters.
+            {{ t('auth.errors.passwordMinLength') }}
           }
         </p-message>
       }
     </div>
 
     <!-- Submit -->
-    <p-button type="submit" label="Sign in" [loading]="isSubmitting()" styleClass="w-full" />
+    <p-button
+      type="submit"
+      [label]="t('auth.signIn')"
+      [loading]="isSubmitting()"
+      styleClass="w-full"
+    />
   </form>
 
   <p class="text-center text-sm text-surface-500 dark:text-surface-400 mt-8">
-    Don't have an account?
-    <a routerLink="/register" class="text-primary font-medium hover:underline">Sign up</a>
+    {{ t('auth.noAccount') }}
+    <a routerLink="/register" class="text-primary font-medium hover:underline">{{
+      t('auth.signUp')
+    }}</a>
   </p>
 </div>
