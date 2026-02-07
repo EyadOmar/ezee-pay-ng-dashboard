@@ -68,6 +68,7 @@ src/app/
 - Static assets go in `public/`
 - File naming follows Angular short convention: `name.ts` / `name.html` (no `.component.` infix)
 - **No component CSS files** — all styling via Tailwind utility classes in templates
+- **Always use Reactive Forms** (`FormGroup`, `FormControl`, `Validators` from `@angular/forms`) — never template-driven forms. Import `ReactiveFormsModule` in components that need forms.
 
 ## Color Guidelines
 

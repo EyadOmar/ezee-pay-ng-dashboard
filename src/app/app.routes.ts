@@ -10,10 +10,6 @@ export const routes: Routes = [
     children: [
       { path: 'login', loadComponent: () => import('./pages/auth/login/login') },
       { path: 'register', loadComponent: () => import('./pages/auth/register/register') },
-      {
-        path: 'forgot-password',
-        loadComponent: () => import('./pages/auth/forgot-password/forgot-password'),
-      },
     ],
   },
   {

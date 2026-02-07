@@ -42,6 +42,11 @@ const MyTheme = definePreset(Aura, {
       900: '#7F1D1D',
       950: '#450A0A',
     },
+    // Added Slate for specific dark mode input shades
+    slate: {
+      800: '#1F2937', // The specific input BG you wanted
+      700: '#374151', // The specific input Border you wanted
+    },
   },
   semantic: {
     primary: {
@@ -66,16 +71,16 @@ const MyTheme = definePreset(Aura, {
           activeColor: '#3730A3',
         },
         surface: {
-          0: '#FFFFFF',
-          50: '#F9FAFB',
+          0: '#FFFFFF', // Card Background (Pure White)
+          50: '#F9FAFB', // App Background (Lightest Grey)
           100: '#F3F4F6',
-          200: '#E5E7EB',
+          200: '#E5E7EB', // Borders (Subtle)
           300: '#D1D5DB',
           400: '#9CA3AF',
-          500: '#6B7280',
+          500: '#6B7280', // Subtext
           600: '#4B5563',
           700: '#374151',
-          800: '#1F2937',
+          800: '#1F2937', // Main Text
           900: '#111827',
           950: '#030712',
         },
@@ -88,18 +93,26 @@ const MyTheme = definePreset(Aura, {
           activeColor: '#A5B4FC',
         },
         surface: {
-          0: '#0F1115',
-          50: '#18181B',
+          0: '#0F1115', // App Background (Deep Charcoal)
+          50: '#18181B', // Card Background (Slightly Lighter)
           100: '#1F1F23',
-          200: '#27272A',
+          200: '#27272A', // Borders (Subtle Dark)
           300: '#3F3F46',
           400: '#52525B',
           500: '#71717A',
-          600: '#A1A1AA',
+          600: '#A1A1AA', // Subtext
           700: '#D4D4D8',
           800: '#E4E4E7',
-          900: '#F4F4F5',
+          900: '#F4F4F5', // Main Text (Off-White)
           950: '#FAFAFA',
+        },
+        formField: {
+          background: '{slate.800}',
+          borderColor: '{slate.700}',
+          color: '{surface.900}',
+          hoverBorderColor: '{primary.color}',
+          focusBorderColor: '{primary.color}',
+          invalidBorderColor: '{red.500}',
         },
       },
     },

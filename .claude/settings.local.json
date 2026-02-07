@@ -3,7 +3,10 @@
     "allow": [
       "Bash(npx ng build:*)",
       "Bash(del \"E:\\\\projects\\\\ezee-pay-ng-dashboard\\\\src\\\\app\\\\layouts\\\\auth-layout\\\\auth-layout.css\")",
-      "Bash(del \"E:\\\\projects\\\\ezee-pay-ng-dashboard\\\\src\\\\app\\\\layouts\\\\dashboard-layout\\\\dashboard-layout.css\")"
+      "Bash(del \"E:\\\\projects\\\\ezee-pay-ng-dashboard\\\\src\\\\app\\\\layouts\\\\dashboard-layout\\\\dashboard-layout.css\")",
+      "Bash(npm ls:*)",
+      "Bash(dir:*)",
+      "Bash(node -e:*)"
     ]
   }
 }
