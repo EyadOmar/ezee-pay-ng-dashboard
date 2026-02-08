@@ -2,6 +2,19 @@
   "app": {
     "name": "إيزي باي"
   },
+  "nav": {
+    "mainNavigation": "التنقل الرئيسي",
+    "toggleSidebar": "تبديل الشريط الجانبي",
+    "overview": "نظرة عامة",
+    "products": "المنتجات",
+    "orders": "الطلبات",
+    "customers": "العملاء",
+    "inventory": "المخزون",
+    "reports": "التقارير",
+    "settings": "الإعدادات",
+    "notifications": "الإشعارات",
+    "logout": "تسجيل الخروج"
+  },
   "auth": {
     "welcomeBack": "مرحبًا بعودتك",
     "signInSubtitle": "سجّل الدخول إلى حسابك للمتابعة",

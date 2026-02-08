@@ -1,0 +1,44 @@
+<header
+  *transloco="let t"
+  role="banner"
+  class="sticky top-0 z-[100] h-16 flex items-center justify-between px-4
+         backdrop-blur-md bg-surface-0/80 dark:bg-surface-50/80
+         border-b border-surface-200 dark:border-surface-200"
+>
+  <!-- Left: Sidebar toggle -->
+  <div class="flex items-center">
+    @if (layout.showSidebar()) {
+      <p-button
+        [text]="true"
+        [rounded]="true"
+        severity="secondary"
+        [ariaLabel]="t('nav.toggleSidebar')"
+        (onClick)="layout.toggleSidebar()"
+      >
+        <i class="pi pi-bars text-lg"></i>
+      </p-button>
+    }
+  </div>
+
+  <!-- Right: Actions -->
+  <div class="flex items-center gap-2">
+    <p-button
+      [text]="true"
+      [rounded]="true"
+      severity="secondary"
+      [ariaLabel]="t('nav.notifications')"
+    >
+      <i class="pi pi-bell text-lg"></i>
+    </p-button>
+
+    <p-button
+      [text]="true"
+      [rounded]="true"
+      severity="danger"
+      [ariaLabel]="t('nav.logout')"
+      (onClick)="onLogout()"
+    >
+      <i class="pi pi-sign-out text-lg"></i>
+    </p-button>
+  </div>
+</header>

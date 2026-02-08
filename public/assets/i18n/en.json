@@ -2,6 +2,19 @@
   "app": {
     "name": "EzeePay"
   },
+  "nav": {
+    "mainNavigation": "Main navigation",
+    "toggleSidebar": "Toggle sidebar",
+    "overview": "Overview",
+    "products": "Products",
+    "orders": "Orders",
+    "customers": "Customers",
+    "inventory": "Inventory",
+    "reports": "Reports",
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "logout": "Logout"
+  },
   "auth": {
     "welcomeBack": "Welcome back",
     "signInSubtitle": "Sign in to your account to continue",
