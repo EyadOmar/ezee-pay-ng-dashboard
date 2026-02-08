@@ -9,7 +9,8 @@
       "Bash(node -e:*)",
       "WebSearch",
       "WebFetch(domain:jsverse.gitbook.io)",
-      "Bash(npm test:*)"
+      "Bash(npm test:*)",
+      "WebFetch(domain:primeng.org)"
     ]
   }
 }

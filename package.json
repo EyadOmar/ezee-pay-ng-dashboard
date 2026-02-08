@@ -1,6 +1,9 @@
 {
   "name": "ezee-pay-ng-dashboard",
   "version": "0.0.0",
+  "engines": {
+    "node": "22.13.0"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
