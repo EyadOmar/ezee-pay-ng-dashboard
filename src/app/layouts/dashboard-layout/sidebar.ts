@@ -27,6 +27,7 @@ export class Sidebar {
     { route: '/orders', icon: 'pi pi-shopping-cart', labelKey: 'nav.orders', exact: false },
     { route: '/customers', icon: 'pi pi-users', labelKey: 'nav.customers', exact: false },
     { route: '/inventory', icon: 'pi pi-warehouse', labelKey: 'nav.inventory', exact: false },
+    { route: '/stock-categories', icon: 'pi pi-tags', labelKey: 'nav.stockCategories', exact: false },
     { route: '/reports', icon: 'pi pi-chart-bar', labelKey: 'nav.reports', exact: false },
   ];
 

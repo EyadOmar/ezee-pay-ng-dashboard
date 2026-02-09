@@ -10,6 +10,7 @@
     "orders": "الطلبات",
     "customers": "العملاء",
     "inventory": "المخزون",
+    "stockCategories": "أصناف المخزون",
     "reports": "التقارير",
     "settings": "الإعدادات",
     "notifications": "الإشعارات",
@@ -31,6 +32,70 @@
       "passwordRequired": "كلمة المرور مطلوبة.",
       "passwordMinLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",
       "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى."
+    }
+  },
+  "categories": {
+    "title": "أصناف المخزون",
+    "createNew": "إنشاء صنف",
+    "createTitle": "إنشاء صنف",
+    "editTitle": "تعديل صنف",
+    "detailTitle": "تفاصيل الصنف",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "inherited": "موروث",
+    "noData": "لا توجد أصناف",
+    "noDataHint": "أنشئ صنفاً جديداً للبدء",
+    "close": "إغلاق",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "parentCategory": "الصنف الرئيسي",
+    "noParent": "بدون (مستوى أعلى)",
+    "deleteConfirmHeader": "حذف الصنف",
+    "deleteConfirmMessage": "هل أنت متأكد من حذف هذا الصنف؟ سيتم حذف الأصناف الفرعية أيضاً.",
+    "createdAt": "تاريخ الإنشاء",
+    "updatedAt": "تاريخ التحديث",
+    "filters": {
+      "search": "بحث بالاسم...",
+      "parent": "تصفية حسب الصنف الرئيسي",
+      "dateFrom": "من تاريخ",
+      "dateTo": "إلى تاريخ",
+      "clear": "مسح الفلاتر"
+    },
+    "table": {
+      "name": "الاسم",
+      "parent": "الرئيسي",
+      "pricingMethod": "طريقة التسعير",
+      "salesStrategy": "استراتيجية البيع",
+      "status": "الحالة",
+      "created": "تاريخ الإنشاء",
+      "actions": "الإجراءات"
+    },
+    "actions": {
+      "view": "عرض",
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "form": {
+      "nameEn": "الاسم (إنجليزي)",
+      "nameAr": "الاسم (عربي)",
+      "descEn": "الوصف (إنجليزي)",
+      "descAr": "الوصف (عربي)",
+      "parent": "الصنف الرئيسي",
+      "pricingMethod": "طريقة التسعير",
+      "salesStrategy": "استراتيجية البيع",
+      "inactive": "غير نشط",
+      "images": "الصور",
+      "inheritedHint": "موروث من الصنف الرئيسي",
+      "imageDestination": "الوجهة",
+      "setDefault": "تعيين كافتراضي",
+      "default": "افتراضي",
+      "uploadImage": "رفع صورة",
+      "errors": {
+        "nameEnRequired": "الاسم بالإنجليزية مطلوب.",
+        "nameArRequired": "الاسم بالعربية مطلوب.",
+        "pricingMethodRequired": "طريقة التسعير مطلوبة.",
+        "salesStrategyRequired": "استراتيجية البيع مطلوبة."
+      }
     }
   }
 }

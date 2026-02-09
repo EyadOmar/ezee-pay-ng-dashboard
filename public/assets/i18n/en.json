@@ -10,6 +10,7 @@
     "orders": "Orders",
     "customers": "Customers",
     "inventory": "Inventory",
+    "stockCategories": "Stock Categories",
     "reports": "Reports",
     "settings": "Settings",
     "notifications": "Notifications",
@@ -31,6 +32,70 @@
       "passwordRequired": "Password is required.",
       "passwordMinLength": "Password must be at least 6 characters.",
       "loginFailed": "Login failed. Please try again."
+    }
+  },
+  "categories": {
+    "title": "Stock Categories",
+    "createNew": "Create Category",
+    "createTitle": "Create Category",
+    "editTitle": "Edit Category",
+    "detailTitle": "Category Details",
+    "active": "Active",
+    "inactive": "Inactive",
+    "inherited": "Inherited",
+    "noData": "No categories found",
+    "noDataHint": "Create a new category to get started",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "parentCategory": "Parent Category",
+    "noParent": "None (Top-level)",
+    "deleteConfirmHeader": "Delete Category",
+    "deleteConfirmMessage": "Are you sure you want to delete this category? Children will also be removed.",
+    "createdAt": "Created",
+    "updatedAt": "Updated",
+    "filters": {
+      "search": "Search by name...",
+      "parent": "Filter by parent",
+      "dateFrom": "From date",
+      "dateTo": "To date",
+      "clear": "Clear Filters"
+    },
+    "table": {
+      "name": "Name",
+      "parent": "Parent",
+      "pricingMethod": "Pricing Method",
+      "salesStrategy": "Sales Strategy",
+      "status": "Status",
+      "created": "Created",
+      "actions": "Actions"
+    },
+    "actions": {
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "form": {
+      "nameEn": "Name (English)",
+      "nameAr": "Name (Arabic)",
+      "descEn": "Description (English)",
+      "descAr": "Description (Arabic)",
+      "parent": "Parent Category",
+      "pricingMethod": "Pricing Method",
+      "salesStrategy": "Sales Strategy",
+      "inactive": "Inactive",
+      "images": "Images",
+      "inheritedHint": "Inherited from parent category",
+      "imageDestination": "Destination",
+      "setDefault": "Set as Default",
+      "default": "Default",
+      "uploadImage": "Upload Image",
+      "errors": {
+        "nameEnRequired": "English name is required.",
+        "nameArRequired": "Arabic name is required.",
+        "pricingMethodRequired": "Pricing method is required.",
+        "salesStrategyRequired": "Sales strategy is required."
+      }
     }
   }
 }

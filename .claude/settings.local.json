@@ -26,7 +26,11 @@
       "Bash(ping:*)",
       "mcp__playwright__browser_type",
       "mcp__playwright__browser_press_key",
-      "mcp__playwright__browser_hover"
+      "mcp__playwright__browser_hover",
+      "Bash(npx:*)",
+      "Bash(python -c \"import zipfile, xml.etree.ElementTree as ET; z=zipfile.ZipFile\\(''1001-Stock Items Category.docx''\\); doc=ET.fromstring\\(z.read\\(''word/document.xml''\\)\\); print\\(''''.join\\(t.text for t in doc.iter\\(\\) if t.text\\)\\)\")",
+      "mcp__playwright__browser_run_code",
+      "mcp__playwright__browser_console_messages"
     ]
   }
 }
