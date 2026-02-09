@@ -13,7 +13,9 @@
     "reports": "Reports",
     "settings": "Settings",
     "notifications": "Notifications",
-    "logout": "Logout"
+    "logout": "Logout",
+    "welcome": "Welcome",
+    "profile": "Profile"
   },
   "auth": {
     "welcomeBack": "Welcome back",

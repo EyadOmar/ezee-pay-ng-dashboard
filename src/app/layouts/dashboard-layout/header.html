@@ -1,12 +1,10 @@
 <header
   *transloco="let t"
   role="banner"
-  class="sticky top-0 z-[100] h-16 flex items-center justify-between px-4
-         backdrop-blur-md bg-surface-0/80 dark:bg-surface-50/80
-         border-b border-surface-200 dark:border-surface-200"
+  class="shrink-0 h-16 flex items-center justify-between px-5 gap-4"
 >
-  <!-- Left: Sidebar toggle -->
-  <div class="flex items-center">
+  <!-- Left: Toggle + greeting -->
+  <div class="flex items-center gap-3">
     @if (layout.showSidebar()) {
       <p-button
         [text]="true"
@@ -18,27 +16,76 @@
         <i class="pi pi-bars text-lg"></i>
       </p-button>
     }
+    @if (user(); as u) {
+      <div class="hidden sm:block">
+        <span class="text-surface-500 dark:text-surface-600 text-sm">{{ t('nav.welcome') }},</span>
+        <span class="text-surface-900 dark:text-surface-900 text-sm font-semibold ms-1">{{
+          u.name
+        }}</span>
+      </div>
+    }
   </div>
 
   <!-- Right: Actions -->
-  <div class="flex items-center gap-2">
-    <p-button
-      [text]="true"
-      [rounded]="true"
-      severity="secondary"
-      [ariaLabel]="t('nav.notifications')"
-    >
-      <i class="pi pi-bell text-lg"></i>
-    </p-button>
+  <div class="flex items-center gap-1">
+    <theme-toggle />
+    <language-selector />
 
-    <p-button
-      [text]="true"
-      [rounded]="true"
-      severity="danger"
-      [ariaLabel]="t('nav.logout')"
-      (onClick)="onLogout()"
-    >
-      <i class="pi pi-sign-out text-lg"></i>
-    </p-button>
+    <div class="w-px h-6 bg-surface-300 dark:bg-surface-300 mx-1"></div>
+
+    <!-- Profile avatar -->
+    @if (user(); as u) {
+      <button
+        type="button"
+        (click)="profileMenu.toggle($event)"
+        class="size-9 rounded-full bg-primary text-primary-contrast flex items-center justify-center text-sm font-bold cursor-pointer border-2 border-transparent hover:border-primary/30 transition-all duration-200"
+        [attr.aria-label]="t('nav.profile')"
+      >
+        {{ u.name.charAt(0).toUpperCase() }}
+      </button>
+
+      <p-popover #profileMenu>
+        <div class="w-56">
+          <!-- User info -->
+          <div
+            class="flex items-center gap-3 px-3 py-3 border-b border-surface-200 dark:border-surface-200"
+          >
+            <div
+              class="size-10 rounded-full bg-primary text-primary-contrast flex items-center justify-center text-sm font-bold shrink-0"
+            >
+              {{ u.name.charAt(0).toUpperCase() }}
+            </div>
+            <div class="min-w-0 flex-1">
+              <div class="text-sm font-semibold text-surface-900 dark:text-surface-900 truncate">
+                {{ u.name }}
+              </div>
+              <div class="text-xs text-surface-500 dark:text-surface-600 truncate">
+                {{ u.email }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Menu items -->
+          <div class="py-1">
+            <a
+              routerLink="/settings"
+              (click)="profileMenu.hide()"
+              class="flex items-center gap-3 px-3 py-2.5 no-underline text-surface-700 dark:text-surface-600 hover:bg-surface-100 dark:hover:bg-surface-100/40 transition-colors duration-200"
+            >
+              <i class="pi pi-cog text-base"></i>
+              <span class="text-sm">{{ t('nav.settings') }}</span>
+            </a>
+            <button
+              type="button"
+              (click)="onLogout()"
+              class="flex items-center gap-3 px-3 py-2.5 w-full text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors duration-200 border-0 bg-transparent cursor-pointer"
+            >
+              <i class="pi pi-sign-out text-base"></i>
+              <span class="text-sm">{{ t('nav.logout') }}</span>
+            </button>
+          </div>
+        </div>
+      </p-popover>
+    }
   </div>
 </header>

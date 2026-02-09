@@ -13,7 +13,9 @@
     "reports": "التقارير",
     "settings": "الإعدادات",
     "notifications": "الإشعارات",
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "welcome": "مرحباً",
+    "profile": "الملف الشخصي"
   },
   "auth": {
     "welcomeBack": "مرحبًا بعودتك",

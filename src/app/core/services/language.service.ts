@@ -110,6 +110,7 @@ export class LanguageService {
       const html = document.documentElement;
       html.setAttribute('lang', lang);
       html.setAttribute('dir', dir);
+      html.style.fontFamily = lang === 'ar' ? "'Rubik', sans-serif" : "'Inter', sans-serif";
 
       this.primeng.setTranslation(lang === 'ar' ? AR_LOCALE : EN_LOCALE);
 

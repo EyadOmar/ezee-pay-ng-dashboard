@@ -40,6 +40,14 @@
   border-radius: 9999px;
 }
 
+html, html[lang='en'] {
+  font-family: 'Inter', sans-serif;
+}
+
+html[lang='ar'] {
+  font-family: 'Rubik', sans-serif;
+}
+
 .safe-bottom {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
