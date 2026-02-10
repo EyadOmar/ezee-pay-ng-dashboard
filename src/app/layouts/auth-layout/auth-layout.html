@@ -1,17 +1,26 @@
-<div *transloco="let t" class="h-svh py-2 px-4 md:p-2 flex">
+<div *transloco="let t" class="h-svh py-4 lg:ps-0 lg:p-2 flex">
   <!-- Page content -->
-  <div class="flex-1 flex flex-col">
+  <div class="flex-1 px-4 flex flex-col">
     <!-- Fixed header -->
-    <header class="h-16 shrink-0 flex justify-between items-center p-2 ps-0">
-      <div class="flex items-center gap-2">
+    <header class="h-16 shrink-0 flex justify-between items-center">
+      <div class="flex items-center gap-1 sm:gap-2">
         <img
           ngSrc="assets/images/logos/full-rounded-icon-like.png"
           width="60"
           height="60"
           alt="EzeePay Logo"
           priority
+          class="hidden sm:block"
         />
-        <span class="font-bold text-primary italic text-3xl">{{ t('app.name') }}</span>
+        <img
+          ngSrc="assets/images/logos/full-rounded-icon-like.png"
+          width="50"
+          height="50"
+          alt="EzeePay Logo"
+          priority
+          class="sm:hidden"
+        />
+        <span class="font-bold text-primary italic text-xl sm:text-3xl">{{ t('app.name') }}</span>
       </div>
       <div class="flex items-center gap-2">
         <language-selector />

@@ -2,25 +2,19 @@
   *transloco="let t"
   role="navigation"
   [attr.aria-label]="t('nav.mainNavigation')"
-  class="fixed bottom-0 inset-x-0 z-[1000]
-         bg-surface-0/95 dark:bg-surface-50/95 backdrop-blur-md
-         border-t border-surface-200 dark:border-surface-200
-         shadow-[0_-2px_10px_rgba(0,0,0,0.04)] dark:shadow-[0_-2px_10px_rgba(255,255,255,0.06)]
-         safe-bottom"
+  class="fixed bottom-0 inset-x-0 z-[1000] bg-surface-0/95 dark:bg-surface-50/95 backdrop-blur-md border-t border-surface-200 dark:border-surface-200 shadow-[0_-2px_10px_rgba(0,0,0,0.04)] dark:shadow-[0_-2px_10px_rgba(255,255,255,0.06)] safe-bottom"
 >
-  <div class="flex items-center justify-around h-16 px-2">
+  <div class="flex items-center justify-around h-16 px-4">
     @for (item of navItems; track item.route) {
       <a
         [routerLink]="item.route"
         routerLinkActive="active-tab"
         [routerLinkActiveOptions]="{ exact: item.exact }"
-        class="flex flex-col items-center justify-center gap-1 min-w-14 py-1.5
-               text-surface-400 dark:text-surface-500 no-underline
-               transition-colors duration-200 relative
-               [&.active-tab]:text-primary"
+        class="flex flex-col items-center justify-center gap-1 min-w-14 py-1.5 text-surface-400 dark:text-surface-500 no-underline transition-colors duration-200 relative [&.active-tab]:text-primary"
       >
-        <span class="absolute top-0 inset-x-4 h-0.5 rounded-full bg-primary scale-x-0
-                     [.active-tab_&]:scale-x-100 transition-transform duration-200"></span>
+        <span
+          class="absolute top-0 inset-x-4 h-0.5 rounded-full bg-primary scale-x-0 [.active-tab_&]:scale-x-100 transition-transform duration-200"
+        ></span>
         <i [class]="item.icon + ' text-xl'"></i>
         <span class="text-[10px] leading-tight font-medium">{{ t(item.labelKey) }}</span>
       </a>
