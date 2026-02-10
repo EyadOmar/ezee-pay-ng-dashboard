@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { Button } from 'primeng/button';
-import { FloatLabel } from 'primeng/floatlabel';
+import { FormField } from '../../../shared/components/form-field/form-field';
 import { InputText } from 'primeng/inputtext';
 import { Message } from 'primeng/message';
 import { Password } from 'primeng/password';
@@ -16,7 +16,7 @@ import { AuthService } from '../../../core/services/auth.service';
     RouterLink,
     TranslocoDirective,
     Button,
-    FloatLabel,
+    FormField,
     InputText,
     Message,
     Password,

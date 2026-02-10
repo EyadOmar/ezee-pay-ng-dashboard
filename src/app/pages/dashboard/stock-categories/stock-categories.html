@@ -1,281 +1,163 @@
 <div *transloco="let t" class="flex flex-col gap-4">
+  <!-- Breadcrumb -->
+  <p-breadcrumb [model]="breadcrumbItems()" [home]="homeItem()" styleClass="text-sm border-0 bg-transparent p-0" />
+
   <!-- Toolbar -->
-  <p-toolbar>
-    <ng-template #start>
-      <h2 class="text-xl font-semibold text-surface-900 dark:text-surface-900 m-0">
-        {{ t('categories.title') }}
-      </h2>
-    </ng-template>
-    <ng-template #end>
-      <p-button
-        [label]="t('categories.createNew')"
-        icon="pi pi-plus"
-        (onClick)="onCreateNew()"
-      />
-    </ng-template>
-  </p-toolbar>
-
-  <!-- Filters -->
-  <div
-    class="bg-surface-0 dark:bg-surface-50 rounded-lg border border-surface-200 dark:border-surface-200 p-4"
-  >
-    <form [formGroup]="filterForm" class="flex flex-wrap items-end gap-3">
-      <!-- Search -->
-      <div class="flex-1 min-w-56">
-        <p-iconfield>
-          <p-inputicon styleClass="pi pi-search" />
-          <input
-            pInputText
-            formControlName="searchTerm"
-            [placeholder]="t('categories.filters.search')"
-            class="w-full"
-          />
-        </p-iconfield>
-      </div>
-
-      <!-- Parent Filter -->
-      <div class="min-w-48">
-        <p-select
-          formControlName="parentFilter"
-          [options]="parentCategories()"
-          [optionLabel]="isAr() ? 'nameAr' : 'nameEn'"
-          optionValue="id"
-          [showClear]="true"
-          [placeholder]="t('categories.filters.parent')"
-        />
-      </div>
-
-      <!-- Date From -->
-      <div class="min-w-40">
-        <p-datepicker
-          formControlName="dateFrom"
-          [placeholder]="t('categories.filters.dateFrom')"
-          dateFormat="dd/mm/yy"
-          [showIcon]="true"
-        />
-      </div>
-
-      <!-- Date To -->
-      <div class="min-w-40">
-        <p-datepicker
-          formControlName="dateTo"
-          [placeholder]="t('categories.filters.dateTo')"
-          dateFormat="dd/mm/yy"
-          [showIcon]="true"
-        />
-      </div>
-
-      <!-- Clear -->
-      <p-button
-        [label]="t('categories.filters.clear')"
-        severity="secondary"
-        [outlined]="true"
-        icon="pi pi-filter-slash"
-        (onClick)="clearFilters()"
-      />
-    </form>
+  <div class="flex items-center justify-between">
+    <h2 class="text-xl font-semibold text-surface-900 dark:text-surface-900 m-0">
+      {{ t('categories.title') }}
+    </h2>
+    <p-button [label]="t('categories.createNew')" icon="pi pi-plus" (onClick)="onCreateNew()" />
   </div>
+
+  <form [formGroup]="filterForm" class="flex flex-wrap items-end gap-3">
+    <!-- Search -->
+    <div class="flex-1 min-w-56">
+      <p-iconfield>
+        <p-inputicon styleClass="pi pi-search" />
+        <input
+          pInputText
+          formControlName="searchTerm"
+          [placeholder]="t('categories.filters.search')"
+          class="w-full"
+        />
+        @if (filterForm.controls.searchTerm.value) {
+          <p-inputicon styleClass="pi pi-times cursor-pointer" (click)="filterForm.controls.searchTerm.reset()" />
+        }
+      </p-iconfield>
+    </div>
+
+    <!-- Date From -->
+    <div class="min-w-40">
+      <p-datepicker
+        formControlName="dateFrom"
+        [placeholder]="t('categories.filters.dateFrom')"
+        dateFormat="dd/mm/yy"
+        [showIcon]="true"
+        [showClear]="true"
+        appendTo="body"
+      />
+    </div>
+
+    <!-- Date To -->
+    <div class="min-w-40">
+      <p-datepicker
+        formControlName="dateTo"
+        [placeholder]="t('categories.filters.dateTo')"
+        dateFormat="dd/mm/yy"
+        [showIcon]="true"
+        [showClear]="true"
+        appendTo="body"
+      />
+    </div>
+  </form>
 
   <!-- Table -->
-  <div class="bg-surface-0 dark:bg-surface-50 rounded-lg border border-surface-200 dark:border-surface-200">
-    <p-table
-      [value]="displayCategories()"
-      [expandedRowKeys]="expandedRows"
-      dataKey="id"
-      [rowHover]="true"
-      [rows]="10"
-      [paginator]="true"
-      [rowsPerPageOptions]="[5, 10, 25]"
-    >
-      <ng-template #header>
-        <tr>
-          <th style="width: 3rem"></th>
-          <th>{{ t('categories.table.name') }}</th>
-          <th>{{ t('categories.table.pricingMethod') }}</th>
-          <th>{{ t('categories.table.salesStrategy') }}</th>
-          <th>{{ t('categories.table.status') }}</th>
-          <th>{{ t('categories.table.created') }}</th>
-          <th style="width: 12rem">{{ t('categories.table.actions') }}</th>
-        </tr>
-      </ng-template>
+  <p-table
+    [value]="displayCategories()"
+    dataKey="id"
+    [rowHover]="true"
+    [rows]="10"
+    [paginator]="true"
+    [rowsPerPageOptions]="[5, 10, 25]"
+    size="small"
+    showGridlines
+  >
+    <ng-template #header>
+      <tr>
+        <th>{{ t('categories.table.name') }}</th>
+        <th>{{ t('categories.table.parent') }}</th>
+        <th>{{ t('categories.table.pricingMethod') }}</th>
+        <th>{{ t('categories.table.salesStrategy') }}</th>
+        <th>{{ t('categories.table.status') }}</th>
+        <th>{{ t('categories.table.created') }}</th>
+        <th style="width: 12rem">{{ t('categories.table.actions') }}</th>
+      </tr>
+    </ng-template>
 
-      <ng-template #body let-parent let-expanded="expanded">
-        <tr>
-          <td>
-            @if (parent.children && parent.children.length > 0) {
-              <p-button
-                type="button"
-                [pRowToggler]="parent"
-                [text]="true"
-                [rounded]="true"
-                severity="secondary"
-                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
-              />
-            }
-          </td>
-          <td>
-            <div class="flex flex-col">
-              <span class="font-medium text-surface-900 dark:text-surface-900">
-                {{ isAr() ? parent.nameAr : parent.nameEn }}
-              </span>
-              <span class="text-sm text-surface-500 dark:text-surface-600">
-                {{ isAr() ? parent.nameEn : parent.nameAr }}
-              </span>
-            </div>
-          </td>
-          <td>
-            <p-tag [value]="getPricingLabel(parent.pricingMethod)" [rounded]="true" severity="info" />
-          </td>
-          <td>
-            <p-tag [value]="getSalesLabel(parent.salesStrategy)" [rounded]="true" severity="secondary" />
-          </td>
-          <td>
-            @if (parent.inactive) {
-              <p-tag [value]="t('categories.inactive')" severity="danger" [rounded]="true" />
-            } @else {
-              <p-tag [value]="t('categories.active')" severity="success" [rounded]="true" />
-            }
-          </td>
-          <td class="text-sm text-surface-600 dark:text-surface-600">
-            {{ parent.createdAt | date: 'mediumDate' }}
-          </td>
-          <td>
-            <div class="flex gap-1">
-              <p-button
-                icon="pi pi-eye"
-                [rounded]="true"
-                [text]="true"
-                severity="info"
-                [pTooltip]="t('categories.actions.view')"
-                [attr.aria-label]="t('categories.actions.view')"
-                (onClick)="onView(parent)"
-              />
-              <p-button
-                icon="pi pi-pencil"
-                [rounded]="true"
-                [text]="true"
-                severity="secondary"
-                [pTooltip]="t('categories.actions.edit')"
-                [attr.aria-label]="t('categories.actions.edit')"
-                (onClick)="onEdit(parent)"
-              />
-              <p-button
-                icon="pi pi-trash"
-                [rounded]="true"
-                [text]="true"
-                severity="danger"
-                [pTooltip]="t('categories.actions.delete')"
-                [attr.aria-label]="t('categories.actions.delete')"
-                (onClick)="onDelete($event, parent)"
-              />
-            </div>
-          </td>
-        </tr>
-      </ng-template>
+    <ng-template #body let-cat>
+      <tr>
+        <td>
+          <div class="flex flex-col">
+            <span class="font-medium text-surface-900 dark:text-surface-900">
+              {{ isAr() ? cat.nameAr : cat.nameEn }}
+            </span>
+            <span class="text-sm text-surface-500 dark:text-surface-600">
+              {{ isAr() ? cat.nameEn : cat.nameAr }}
+            </span>
+          </div>
+        </td>
+        <td class="text-surface-600 dark:text-surface-600">
+          {{ getParentName(cat.parentId) }}
+        </td>
+        <td>
+          <p-tag [value]="getPricingLabel(cat.pricingMethod)" [rounded]="true" severity="info" />
+        </td>
+        <td>
+          <p-tag
+            [value]="getSalesLabel(cat.salesStrategy)"
+            [rounded]="true"
+            severity="secondary"
+          />
+        </td>
+        <td>
+          @if (cat.inactive) {
+            <p-tag [value]="t('categories.inactive')" severity="danger" [rounded]="true" />
+          } @else {
+            <p-tag [value]="t('categories.active')" severity="success" [rounded]="true" />
+          }
+        </td>
+        <td class="text-sm text-surface-600 dark:text-surface-600">
+          {{ cat.createdAt | date: 'mediumDate' }}
+        </td>
+        <td>
+          <div class="flex gap-1">
+            <p-button
+              icon="pi pi-eye"
+              [rounded]="true"
+              [text]="true"
+              severity="info"
+              [pTooltip]="t('categories.actions.view')"
+              [attr.aria-label]="t('categories.actions.view')"
+              (onClick)="onView(cat)"
+            />
+            <p-button
+              icon="pi pi-pencil"
+              [rounded]="true"
+              [text]="true"
+              severity="secondary"
+              [pTooltip]="t('categories.actions.edit')"
+              [attr.aria-label]="t('categories.actions.edit')"
+              (onClick)="onEdit(cat)"
+            />
+            <p-button
+              icon="pi pi-trash"
+              [rounded]="true"
+              [text]="true"
+              severity="danger"
+              [pTooltip]="t('categories.actions.delete')"
+              [attr.aria-label]="t('categories.actions.delete')"
+              (onClick)="onDelete($event, cat)"
+            />
+          </div>
+        </td>
+      </tr>
+    </ng-template>
 
-      <ng-template #rowexpansion let-parent>
-        @for (child of parent.children; track child.id) {
-          <tr class="bg-surface-50 dark:bg-surface-100">
-            <td></td>
-            <td>
-              <div class="flex items-center gap-2 ps-4">
-                <i class="pi pi-arrow-right text-sm text-surface-400 rtl:rotate-180"></i>
-                <div class="flex flex-col">
-                  <span class="font-medium text-surface-900 dark:text-surface-900">
-                    {{ isAr() ? child.nameAr : child.nameEn }}
-                  </span>
-                  <span class="text-sm text-surface-500 dark:text-surface-600">
-                    {{ isAr() ? child.nameEn : child.nameAr }}
-                  </span>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="flex items-center gap-1">
-                <p-tag [value]="getPricingLabel(child.pricingMethod)" [rounded]="true" severity="info" />
-                <span class="text-primary text-xs">{{ t('categories.inherited') }}</span>
-              </div>
-            </td>
-            <td>
-              <div class="flex items-center gap-1">
-                <p-tag [value]="getSalesLabel(child.salesStrategy)" [rounded]="true" severity="secondary" />
-                <span class="text-primary text-xs">{{ t('categories.inherited') }}</span>
-              </div>
-            </td>
-            <td>
-              @if (child.inactive) {
-                <p-tag [value]="t('categories.inactive')" severity="danger" [rounded]="true" />
-              } @else {
-                <p-tag [value]="t('categories.active')" severity="success" [rounded]="true" />
-              }
-            </td>
-            <td class="text-sm text-surface-600 dark:text-surface-600">
-              {{ child.createdAt | date: 'mediumDate' }}
-            </td>
-            <td>
-              <div class="flex gap-1">
-                <p-button
-                  icon="pi pi-eye"
-                  [rounded]="true"
-                  [text]="true"
-                  severity="info"
-                  [pTooltip]="t('categories.actions.view')"
-                  [attr.aria-label]="t('categories.actions.view')"
-                  (onClick)="onView(child)"
-                />
-                <p-button
-                  icon="pi pi-pencil"
-                  [rounded]="true"
-                  [text]="true"
-                  severity="secondary"
-                  [pTooltip]="t('categories.actions.edit')"
-                  [attr.aria-label]="t('categories.actions.edit')"
-                  (onClick)="onEdit(child)"
-                />
-                <p-button
-                  icon="pi pi-trash"
-                  [rounded]="true"
-                  [text]="true"
-                  severity="danger"
-                  [pTooltip]="t('categories.actions.delete')"
-                  [attr.aria-label]="t('categories.actions.delete')"
-                  (onClick)="onDelete($event, child)"
-                />
-              </div>
-            </td>
-          </tr>
-        }
-      </ng-template>
-
-      <ng-template #emptymessage>
-        <tr>
-          <td colspan="7">
-            <div class="flex flex-col items-center justify-center py-12 text-surface-500 dark:text-surface-600">
-              <i class="pi pi-tags text-4xl mb-3"></i>
-              <p class="text-lg font-medium">{{ t('categories.noData') }}</p>
-              <p class="text-sm">{{ t('categories.noDataHint') }}</p>
-            </div>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
-
-  <!-- Form Dialog -->
-  <app-category-form-dialog
-    [(visible)]="formDialogVisible"
-    [category]="selectedCategory()"
-    [isEditMode]="isEditMode()"
-    [parentCategories]="parentCategories()"
-    (saved)="onSave($event)"
-  />
-
-  <!-- Detail Dialog -->
-  <app-category-detail-dialog
-    [(visible)]="detailDialogVisible"
-    [category]="selectedCategory()"
-    [parentCategory]="detailParent()"
-  />
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="7">
+          <div
+            class="flex flex-col items-center justify-center py-12 text-surface-500 dark:text-surface-600"
+          >
+            <i class="pi pi-tags text-4xl mb-3"></i>
+            <p class="text-lg font-medium">{{ t('categories.noData') }}</p>
+            <p class="text-sm">{{ t('categories.noDataHint') }}</p>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 
   <!-- Confirm Dialog -->
   <p-confirmdialog />

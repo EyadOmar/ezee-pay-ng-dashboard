@@ -24,7 +24,7 @@ export const routes: Routes = [
       { path: 'orders', loadComponent: () => import('./pages/dashboard/orders/orders') },
       { path: 'customers', loadComponent: () => import('./pages/dashboard/customers/customers') },
       { path: 'inventory', loadComponent: () => import('./pages/dashboard/inventory/inventory') },
-      { path: 'stock-categories', loadComponent: () => import('./pages/dashboard/stock-categories/stock-categories') },
+      { path: 'stock-categories', loadChildren: () => import('./pages/dashboard/stock-categories/stock-categories.routes') },
       { path: 'reports', loadComponent: () => import('./pages/dashboard/reports/reports') },
       { path: 'settings', loadComponent: () => import('./pages/dashboard/settings/settings') },
     ],

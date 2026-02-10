@@ -10,11 +10,8 @@
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
     <!-- Email -->
-    <div class="flex flex-col gap-2">
-      <p-floatlabel variant="on">
-        <input fluid pInputText id="email" formControlName="email" autocomplete="email" />
-        <label for="email">{{ t('auth.email') }}</label>
-      </p-floatlabel>
+    <app-form-field [label]="t('auth.email')" for="email" [required]="true">
+      <input fluid pInputText id="email" formControlName="email" autocomplete="email" />
       @if (form.controls.email.invalid && (form.controls.email.touched || isSubmitting())) {
         <p-message severity="error" size="small" variant="simple">
           @if (form.controls.email.hasError('required')) {
@@ -25,21 +22,18 @@
           }
         </p-message>
       }
-    </div>
+    </app-form-field>
 
     <!-- Password -->
-    <div class="flex flex-col gap-2">
-      <p-floatlabel variant="on">
-        <p-password
-          id="password"
-          formControlName="password"
-          [feedback]="false"
-          [toggleMask]="true"
-          fluid
-          inputStyleClass="w-full"
-        />
-        <label for="password">{{ t('auth.password') }}</label>
-      </p-floatlabel>
+    <app-form-field [label]="t('auth.password')" for="password" [required]="true">
+      <p-password
+        id="password"
+        formControlName="password"
+        [feedback]="false"
+        [toggleMask]="true"
+        fluid
+        inputStyleClass="w-full"
+      />
       @if (form.controls.password.invalid && (form.controls.password.touched || isSubmitting())) {
         <p-message severity="error" size="small" variant="simple">
           @if (form.controls.password.hasError('required')) {
@@ -50,7 +44,7 @@
           }
         </p-message>
       }
-    </div>
+    </app-form-field>
 
     <!-- Submit -->
     <p-button

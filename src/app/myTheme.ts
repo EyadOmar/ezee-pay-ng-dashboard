@@ -106,6 +106,42 @@ const MyTheme = definePreset(Aura, {
           900: '#F4F4F5', // Main Text (Off-White)
           950: '#FAFAFA',
         },
+        content: {
+          background: '{surface.100}',
+          hoverBackground: '{surface.200}',
+          borderColor: '{surface.200}',
+          color: '{surface.900}',
+          hoverColor: '{surface.900}',
+        },
+        text: {
+          color: '{surface.900}',
+          hoverColor: '{surface.950}',
+          mutedColor: '{surface.600}',
+          hoverMutedColor: '{surface.700}',
+        },
+        overlay: {
+          select: {
+            background: '{surface.50}',
+            borderColor: '{surface.200}',
+            color: '{surface.900}',
+          },
+          popover: {
+            background: '{surface.50}',
+            borderColor: '{surface.200}',
+            color: '{surface.900}',
+          },
+          modal: {
+            background: '{surface.50}',
+            borderColor: '{surface.200}',
+            color: '{surface.900}',
+          },
+        },
+        list: {
+          option: {
+            focusBackground: '{surface.100}',
+            focusColor: '{surface.900}',
+          },
+        },
         formField: {
           background: '{slate.800}',
           borderColor: '{slate.700}',
@@ -114,6 +150,16 @@ const MyTheme = definePreset(Aura, {
           focusBorderColor: '{primary.color}',
           invalidBorderColor: '{red.500}',
         },
+      },
+    },
+  },
+  components: {
+    datatable: {
+      headerCell: {
+        borderColor: '{content.border.color}',
+      },
+      bodyCell: {
+        borderColor: '{content.border.color}',
       },
     },
   },

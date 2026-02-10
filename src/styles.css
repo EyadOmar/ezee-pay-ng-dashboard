@@ -40,7 +40,8 @@
   border-radius: 9999px;
 }
 
-html, html[lang='en'] {
+html,
+html[lang='en'] {
   font-family: 'Inter', sans-serif;
 }
 
@@ -50,4 +51,18 @@ html[lang='ar'] {
 
 .safe-bottom {
   padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Global PrimeNG DataTable overrides */
+.p-datatable-table-container {
+  border-radius: var(--p-content-border-radius);
+  overflow: hidden;
+}
+
+.p-paginator {
+  justify-content: flex-end;
+}
+
+.my-app-dark .p-toast-detail {
+  color: var(--p-surface-900);
 }

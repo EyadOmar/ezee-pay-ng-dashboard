@@ -9,6 +9,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { provideTransloco } from '@jsverse/transloco';
 
+import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import MyTheme from './myTheme';
 import { routes } from './app.routes';
@@ -20,6 +21,7 @@ import { LanguageService } from './core/services/language.service';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
+    MessageService,
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideAppInitializer(() => inject(AuthService).init()),
